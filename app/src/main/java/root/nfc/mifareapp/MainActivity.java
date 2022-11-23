@@ -62,30 +62,19 @@ public class MainActivity extends AppCompatActivity {
         mHexKeyA = ((EditText) findViewById(R.id.editTextKeyA));
         mHexKeyB = ((EditText) findViewById(R.id.editTextKeyB));
         mRadioGroup = ((RadioGroup) findViewById(R.id.rBtnGrp));
-<<<<<<< HEAD
+
         //findViewById(R.id.escribir_button).setOnClickListener(mTagWrite);
-        findViewById(R.id.escribir_button1).setOnClickListener(mTagWrite);
-        findViewById(R.id.escribir_button2).setOnClickListener(mTagWrite);
-        findViewById(R.id.escribir_button3).setOnClickListener(mTagWrite);
-        findViewById(R.id.Escribir_button5).setOnClickListener(mTagWrite);
-        findViewById(R.id.escribir_button4).setOnClickListener(mTagWrite);
-
-
-=======
-
-
         findViewById(R.id.escribir_button1).setOnClickListener(mTagWrite);
         findViewById(R.id.escribir_button2).setOnClickListener(mTagWrite);
         findViewById(R.id.escribir_button3).setOnClickListener(mTagWrite);
         findViewById(R.id.escribir_button4).setOnClickListener(mTagWrite);
         findViewById(R.id.escribir_button5).setOnClickListener(mTagWrite);
 
-        findViewById(R.id.autenticar_button1).setOnClickListener(mTagAuthenticate);
-        findViewById(R.id.autenticar_button2).setOnClickListener(mTagAuthenticate);
-        findViewById(R.id.autenticar_button3).setOnClickListener(mTagAuthenticate);
-        findViewById(R.id.autenticar_button4).setOnClickListener(mTagAuthenticate);
-        findViewById(R.id.autenticar_button5).setOnClickListener(mTagAuthenticate);
->>>>>>> 87f76f9069dd428e4826e65bb0201fbaddff9a61
+        findViewById(R.id.autentificar_button1).setOnClickListener(mTagAuthenticate);
+        findViewById(R.id.autentificar_button2).setOnClickListener(mTagAuthenticate);
+        findViewById(R.id.autentificar_button3).setOnClickListener(mTagAuthenticate);
+        findViewById(R.id.autentificar_button4).setOnClickListener(mTagAuthenticate);
+        findViewById(R.id.autentificar_button5).setOnClickListener(mTagAuthenticate);
 
 
 // get an instance of the context's cached NfcAdapter

@@ -69,7 +69,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/autetificar_button2"
+                android:id="@+id/autentificar_button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Autentificar" />
@@ -165,7 +165,7 @@
                 android:text="Autentificar" />
 
             <Button
-                android:id="@+id/Escribir_button5"
+                android:id="@+id/escribir_button5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Button" />
