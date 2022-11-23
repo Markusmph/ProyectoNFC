@@ -90,12 +90,6 @@
                     android:focusable="false"
                     android:inputType="text" />
             </LinearLayout>
-            <Button
-                android:id="@+id/escribir_button"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/escribir_label" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,14 +133,20 @@
                         android:id="@+id/radioButtonkeyA"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/keyA" />
+                        android:text="@string/llaveA" />
                     <RadioButton
                         android:id="@+id/radioButtonkeyB"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/keyB" />
+                        android:text="@string/llaveB" />
                 </RadioGroup>
             </LinearLayout>
+            <Button
+                android:id="@+id/escribir_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/escribir_label" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
