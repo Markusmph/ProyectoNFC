@@ -29,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
     private boolean ReadUIDMode = true;
     String[][]mTechList;
     // UI elements
+    EditText mTemperaturaMinima;
+    EditText mTemperaturaMaxima;
+    EditText mHumedadMinima;
+    EditText mHumedadMaxima;
+    EditText mHumedadTierraMinima;
+    /*
     EditText mTagUID;
     EditText mCardType;
     EditText mHexKeyA;
@@ -39,10 +45,19 @@ public class MainActivity extends AppCompatActivity {
     EditText mDatatoWrite;
     AlertDialog mTagDialog;
     RadioGroup mRadioGroup;
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mTemperaturaMinima = ((EditText) findViewById(R.id.temperaturaMinima_id));
+        mTemperaturaMaxima = ((EditText) findViewById(R.id.temperaturaMaxima_id));
+        mHumedadMinima = ((EditText) findViewById(R.id.humedadMinima_id));
+        mHumedadMaxima = ((EditText) findViewById(R.id.humedadMaxima_id));
+        mHumedadTierraMinima = ((EditText) findViewById(R.id.humedadTierraMinima_id));
+
+        /*
         mTagUID = ((EditText) findViewById(R.id.tag_uid));
         mCardType = ((EditText) findViewById(R.id.cardtype));
         mHexKeyA = ((EditText) findViewById(R.id.editTextKeyA));
@@ -55,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.buttonauthenticate).setOnClickListener(mTagAuthenticate);
         findViewById(R.id.buttonLeerbloque).setOnClickListener(mTagRead);
         findViewById(R.id.buttonEscribirBloque).setOnClickListener(mTagWrite);
+
+         */
 // get an instance of the context's cached NfcAdapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 // if null is returned this demo cannot run. Use this check if the

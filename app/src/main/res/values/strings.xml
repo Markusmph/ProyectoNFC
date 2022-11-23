@@ -6,8 +6,15 @@
 activar NFC en Settings y luego utilice el botón back para regresar a esta app.</string>
     <string name="instrucciones"> Acercar un tag MIFARE al dispositivo Android para leer su UID y su
 tipo.</string>
-    <string name="infotag_label"> INFO DEL TAG:</string>
+    <string name="escribirATag_label">Escribir a tag:</string>
     <string name="tag_UID">" UID del Tag: "</string>
+    <string name="temperaturaMinima_label">"Temperatura mínima: "</string>
+    <string name="temperaturaMaxima_label">"Temperatura máxima: "</string>
+    <string name="humedadMinima_label">"Humedad del ambiente mínima: "</string>
+    <string name="humedadMaxima_label">"Humedad del ambiente máxima: "</string>
+    <string name="humedadTierraMinima_label">"Humedad de tierra mínima: "</string>
+    <string name="escribir_label">"Escribir a tag"</string>
+    <string name="humedad_UID">" UID del Tag: "</string>
     <string name="card_type">" Tipo de Tarjeta: "</string>
     <string name="autenticate_label"> AUTENTIFICACIÓN:</string>
     <string name="keyA_label">" Key A (12 Hex): "</string>

@@ -13,13 +13,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/infotag_label"
+                android:text="@string/escribirATag_label"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/instrucciones"
-                android:textStyle="bold" />
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -27,140 +22,79 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tag_UID" />
+                    android:text="@string/temperaturaMinima_label" />
                 <EditText
-                    android:id="@+id/tag_uid"
+                    android:id="@+id/temperaturaMinima_id"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
                     android:inputType="text" />
             </LinearLayout>
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/card_type" />
+                    android:text="@string/temperaturaMaxima_label" />
                 <EditText
-                    android:id="@+id/cardtype"
+                    android:id="@+id/temperaturaMaxima_id"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
                     android:inputType="text" />
             </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/autenticate_label"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/keyA_label" />
+                    android:text="@string/humedadMinima_label" />
                 <EditText
-                    android:id="@+id/editTextKeyA"
+                    android:id="@+id/humedadMinima_id"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
                     android:inputType="text" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/keyB_label" />
+                    android:text="@string/humedadMaxima_label" />
                 <EditText
-                    android:id="@+id/editTextKeyB"
+                    android:id="@+id/humedadMaxima_id"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
                     android:inputType="text" />
             </LinearLayout>
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sectorauth_label" />
+                    android:text="@string/humedadTierraMinima_label" />
                 <EditText
-                    android:id="@+id/editTextSector"
+                    android:id="@+id/humedadTierraMinima_id"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sel_llave_label" />
-                <RadioGroup
-                    android:id="@+id/rBtnGrp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <RadioButton
-                        android:id="@+id/radioButtonkeyA"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/keyA" />
-                    <RadioButton
-                        android:id="@+id/radioButtonkeyB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/keyB" />
-                </RadioGroup>
+                    android:focusable="false"
+                    android:inputType="text" />
             </LinearLayout>
             <Button
-                android:id="@+id/buttonauthenticate"
+                android:id="@+id/escribir_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/authenticatebutton" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/read_write_label"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/select_block_label" />
-                <EditText
-                    android:id="@+id/editTextBloque"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </LinearLayout>
-            <Button
-                android:id="@+id/buttonLeerbloque"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/leer_bloque_button" />
-            <EditText
-                android:id="@+id/editTextBloqueLeido"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:inputType="text" />
-            <Button
-                android:id="@+id/buttonEscribirBloque"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/escribir_bloque_button" />
-            <EditText
-                android:id="@+id/editTextBloqueAEscribir"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:text="@string/escribir_label" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
