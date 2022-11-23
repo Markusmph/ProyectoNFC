@@ -225,6 +225,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
     void resolveAuthIntent(Intent intent) {
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
