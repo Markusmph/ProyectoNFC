@@ -71,10 +71,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/authenticatebutton" />
             <Button
-                android:id="@+id/buttonEscribirBloque"
+                android:id="@+id/buttonEscribirBloque4"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/escribir_bloque_button" />
+                android:text="@string/escribir_bloque_4_button" />
+            <Button
+                android:id="@+id/buttonEscribirBloque5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/escribir_bloque_5_button" />
             <EditText
                 android:id="@+id/editTextBloqueAEscribir"
                 android:layout_width="fill_parent"
