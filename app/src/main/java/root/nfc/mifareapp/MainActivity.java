@@ -34,17 +34,21 @@ public class MainActivity extends AppCompatActivity {
     EditText mHumedadMinima;
     EditText mHumedadMaxima;
     EditText mHumedadTierraMinima;
+    EditText mHexKeyA;
+    EditText mHexKeyB;
+    EditText mDatatoWrite;
+    RadioGroup mRadioGroup;
+    AlertDialog mTagDialog;
+    EditText mDataBloque;
     /*
     EditText mTagUID;
     EditText mCardType;
-    EditText mHexKeyA;
-    EditText mHexKeyB;
-    EditText mSector;
-    EditText mBloque;
-    EditText mDataBloque;
-    EditText mDatatoWrite;
-    AlertDialog mTagDialog;
-    RadioGroup mRadioGroup;
+
+
+
+
+
+
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,21 +61,13 @@ public class MainActivity extends AppCompatActivity {
         mHumedadMaxima = ((EditText) findViewById(R.id.humedadMaxima_id));
         mHumedadTierraMinima = ((EditText) findViewById(R.id.humedadTierraMinima_id));
 
-        /*
-        mTagUID = ((EditText) findViewById(R.id.tag_uid));
-        mCardType = ((EditText) findViewById(R.id.cardtype));
+
         mHexKeyA = ((EditText) findViewById(R.id.editTextKeyA));
         mHexKeyB = ((EditText) findViewById(R.id.editTextKeyB));
-        mSector = ((EditText) findViewById(R.id.editTextSector));
-        mBloque = ((EditText) findViewById(R.id.editTextBloque));
-        mDataBloque = ((EditText) findViewById(R.id.editTextBloqueLeido));
-        mDatatoWrite = ((EditText) findViewById(R.id.editTextBloqueAEscribir));
         mRadioGroup = ((RadioGroup) findViewById(R.id.rBtnGrp));
-        findViewById(R.id.buttonauthenticate).setOnClickListener(mTagAuthenticate);
-        findViewById(R.id.buttonLeerbloque).setOnClickListener(mTagRead);
-        findViewById(R.id.buttonEscribirBloque).setOnClickListener(mTagWrite);
+        findViewById(R.id.escribir_button).setOnClickListener(mTagWrite);
 
-         */
+
 // get an instance of the context's cached NfcAdapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 // if null is returned this demo cannot run. Use this check if the
@@ -104,96 +100,6 @@ public class MainActivity extends AppCompatActivity {
         mReadWriteTagFilters = new IntentFilter[] { mifareDetected };
 // Setup a tech list for all NFC tags
         mTechList = new String[][] { new String[] { MifareClassic.class.getName() } };
-        resolveReadIntent(getIntent());
-    }
-    void resolveReadIntent(Intent intent) {
-        String action = intent.getAction();
-        if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
-            Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            MifareClassic mfc = MifareClassic.get(tagFromIntent);
-            if (ReadUIDMode)
-            {
-                String tipotag = "";
-                String tamano = "";
-                byte[] tagUID = tagFromIntent.getId();
-                String hexUID = getHexString(tagUID, tagUID.length);
-                Log.i(TAG, "Tag UID: " + hexUID);
-                Editable UIDField = mTagUID.getText();
-                UIDField.clear();
-                UIDField.append(hexUID);
-                switch(mfc.getType())
-                {
-                    case 0: tipotag = "Mifare Classic"; break;
-                    case 1: tipotag = "Mifare Plus"; break;
-                    case 2: tipotag = "Mifare Pro"; break;
-                    default: tipotag = "Mifare Desconocido"; break;
-                }
-                switch(mfc.getSize())
-                {
-                    case 1024: tamano = " (1K Bytes)"; break;
-                    case 2048: tamano = " (2K Bytes)"; break;
-                    case 4096: tamano = " (4K Bytes)"; break;
-                    case 320: tamano = " (MINI - 320 Bytes)"; break;
-                    default: tamano = " (Tamaño desconocido)"; break;
-                }
-                Log.i(TAG, "Card Type: " + tipotag + tamano);
-                Editable CardtypeField = mCardType.getText();
-                CardtypeField.clear();
-                CardtypeField.append(tipotag + tamano);
-            } else
-            {
-                try {
-                    mfc.connect();
-                    boolean auth = false;
-                    String hexkey = "";
-                    int id = mRadioGroup.getCheckedRadioButtonId();
-                    int sector = mfc.blockToSector(Integer.valueOf(mBloque.getText().toString()));
-                    byte[] datakey;
-                    if (id == R.id.radioButtonkeyA){
-                        hexkey = mHexKeyA.getText().toString();
-                        datakey = hexStringToByteArray(hexkey);
-                        auth = mfc.authenticateSectorWithKeyA(sector, datakey);
-                    }
-                    else if (id == R.id.radioButtonkeyB){
-                        hexkey = mHexKeyB.getText().toString();
-                        datakey = hexStringToByteArray(hexkey);
-                        auth = mfc.authenticateSectorWithKeyB(sector, datakey);
-                    }
-                    else {
-//no item selected poner toast
-                        Toast.makeText(this,
-                                "°Seleccionar llave A o B!",
-                                Toast.LENGTH_LONG).show();
-                        mfc.close();
-                        return;
-                    }
-                    if(auth){
-                        int bloque = Integer.valueOf(mBloque.getText().toString());
-                        byte[] dataread = mfc.readBlock(bloque+1);
-                        Log.i("Bloques", getHexString(dataread, dataread.length));
-                        dataread = mfc.readBlock(bloque);
-                        String blockread = getHexString(dataread, dataread.length);
-                        Log.i(TAG, "Bloque Leido: " + blockread);
-                        Editable BlockField = mDataBloque.getText();
-                        BlockField.clear();
-                        BlockField.append(blockread);
-                        Toast.makeText(this,
-                                "Lectura de bloque EXITOSA.",
-                                Toast.LENGTH_LONG).show();
-                    }else{ // Authentication failed - Handle it
-                        Editable BlockField = mDataBloque.getText();
-                        BlockField.clear();
-                        Toast.makeText(this,
-                                "Lectura de bloque FALLIDA dado autentificación fallida.",
-                                Toast.LENGTH_LONG).show();
-                    }
-                    mfc.close();
-                    mTagDialog.cancel();
-                }catch (IOException e) {
-                    Log.e(TAG, e.getLocalizedMessage());
-                }
-            }
-        }
     }
     void resolveWriteIntent(Intent intent) {
         String action = intent.getAction();
@@ -202,21 +108,41 @@ public class MainActivity extends AppCompatActivity {
             MifareClassic mfc = MifareClassic.get(tagFromIntent);
             try {
                 mfc.connect();
-                boolean auth = false;
+                boolean auth1 = false;
+                boolean auth2 = false;
+                boolean auth3 = false;
+                boolean auth4 = false;
+                boolean auth5 = false;
                 String hexkey = "";
                 int id = mRadioGroup.getCheckedRadioButtonId();
-                int bloque = Integer.valueOf(mBloque.getText().toString());
-                int sector = mfc.blockToSector(bloque);
+                int bloqueTempMin = 4;
+                int bloqueTempMax = 5;
+                int bloqueHumAmbMin = 6;
+                int bloqueHumAmbMax = 8;
+                int bloqueHum = 9;
+                int sectorTempMin = mfc.blockToSector(bloqueTempMin);
+                int sectorTempMax = mfc.blockToSector(bloqueTempMax);
+                int sectorHumAmbMin = mfc.blockToSector(bloqueHumAmbMin);
+                int sectorHumAmbMax = mfc.blockToSector(bloqueHumAmbMax);
+                int sectorHum = mfc.blockToSector(bloqueHum);
                 byte[] datakey;
                 if (id == R.id.radioButtonkeyA){
                     hexkey = mHexKeyA.getText().toString();
                     datakey = hexStringToByteArray(hexkey);
-                    auth = mfc.authenticateSectorWithKeyA(sector, datakey);
+                    auth1 = mfc.authenticateSectorWithKeyA(sectorTempMin, datakey);
+                    auth2= mfc.authenticateSectorWithKeyA(sectorTempMax, datakey);
+                    auth3 = mfc.authenticateSectorWithKeyA(sectorHumAmbMin, datakey);
+                    auth4 = mfc.authenticateSectorWithKeyA(sectorHumAmbMax, datakey);
+                    auth5 = mfc.authenticateSectorWithKeyA(sectorHum, datakey);
                 }
                 else if (id == R.id.radioButtonkeyB){
                     hexkey = mHexKeyB.getText().toString();
                     datakey = hexStringToByteArray(hexkey);
-                    auth = mfc.authenticateSectorWithKeyB(sector, datakey);
+                    auth1 = mfc.authenticateSectorWithKeyB(sectorTempMin, datakey);
+                    auth2 = mfc.authenticateSectorWithKeyB(sectorTempMax, datakey);
+                    auth3 = mfc.authenticateSectorWithKeyB(sectorHumAmbMin, datakey);
+                    auth4 = mfc.authenticateSectorWithKeyB(sectorHumAmbMax, datakey);
+                    auth5 = mfc.authenticateSectorWithKeyB(sectorHum, datakey);
                 }
                 else {
 //no item selected poner toast
@@ -226,10 +152,10 @@ public class MainActivity extends AppCompatActivity {
                     mfc.close();
                     return;
                 }
-                if(auth){
+                if(auth1){ //Auth1
                     String strdata = mDatatoWrite.getText().toString();
                     byte[] datatowrite = hexStringToByteArray(strdata);
-                    mfc.writeBlock(bloque, datatowrite);
+                    mfc.writeBlock(bloqueTempMin, datatowrite);
                     Toast.makeText(this,
                             "Escritura a bloque EXITOSA.",
                             Toast.LENGTH_LONG).show();
@@ -238,6 +164,60 @@ public class MainActivity extends AppCompatActivity {
                             "Escritura a bloque FALLIDA dado autentificación fallida.",
                             Toast.LENGTH_LONG).show();
                 }
+
+                if(auth2){ //Auth2
+                    String strdata = mDatatoWrite.getText().toString();
+                    byte[] datatowrite = hexStringToByteArray(strdata);
+                    mfc.writeBlock(bloqueTempMax, datatowrite);
+                    Toast.makeText(this,
+                            "Escritura a bloque EXITOSA.",
+                            Toast.LENGTH_LONG).show();
+                }else{ // Authentication failed - Handle it
+                    Toast.makeText(this,
+                            "Escritura a bloque FALLIDA dado autentificación fallida.",
+                            Toast.LENGTH_LONG).show();
+                }
+
+                if(auth3){ //Auth3
+                    String strdata = mDatatoWrite.getText().toString();
+                    byte[] datatowrite = hexStringToByteArray(strdata);
+                    mfc.writeBlock(bloqueHumAmbMin, datatowrite);
+                    Toast.makeText(this,
+                            "Escritura a bloque EXITOSA.",
+                            Toast.LENGTH_LONG).show();
+                }else{ // Authentication failed - Handle it
+                    Toast.makeText(this,
+                            "Escritura a bloque FALLIDA dado autentificación fallida.",
+                            Toast.LENGTH_LONG).show();
+                }
+
+                if(auth4){ //Auth4
+                    String strdata = mDatatoWrite.getText().toString();
+                    byte[] datatowrite = hexStringToByteArray(strdata);
+                    mfc.writeBlock(bloqueHumAmbMax, datatowrite);
+                    Toast.makeText(this,
+                            "Escritura a bloque EXITOSA.",
+                            Toast.LENGTH_LONG).show();
+                }else{ // Authentication failed - Handle it
+                    Toast.makeText(this,
+                            "Escritura a bloque FALLIDA dado autentificación fallida.",
+                            Toast.LENGTH_LONG).show();
+                }
+
+                if(auth5){ //Auth5
+                    String strdata = mDatatoWrite.getText().toString();
+                    byte[] datatowrite = hexStringToByteArray(strdata);
+                    mfc.writeBlock(bloqueHum, datatowrite);
+                    Toast.makeText(this,
+                            "Escritura a bloque EXITOSA.",
+                            Toast.LENGTH_LONG).show();
+                }else{ // Authentication failed - Handle it
+                    Toast.makeText(this,
+                            "Escritura a bloque FALLIDA dado autentificación fallida.",
+                            Toast.LENGTH_LONG).show();
+                }
+
+
                 mfc.close();
                 mTagDialog.cancel();
             }catch (IOException e) {
@@ -252,20 +232,36 @@ public class MainActivity extends AppCompatActivity {
             MifareClassic mfc = MifareClassic.get(tagFromIntent);
             try {
                 mfc.connect();
-                boolean auth = false;
+                boolean auth1 = false;
+                boolean auth2 = false;
+                boolean auth3 = false;
+                boolean auth4 = false;
+                boolean auth5 = false;
                 String hexkey = "";
                 int id = mRadioGroup.getCheckedRadioButtonId();
-                int sector = Integer.valueOf(mSector.getText().toString());
+                int sectorTempMin = 1;
+                int sectorTempMax = 1;
+                int sectorHumAmbMin = 1;
+                int sectorHumAmbMax = 2;
+                int sectorHum = 2;
                 byte[] datakey;
                 if (id == R.id.radioButtonkeyA){
                     hexkey = mHexKeyA.getText().toString();
                     datakey = hexStringToByteArray(hexkey);
-                    auth = mfc.authenticateSectorWithKeyA(sector, datakey);
+                    auth1 = mfc.authenticateSectorWithKeyA(sectorTempMin, datakey);
+                    auth2 = mfc.authenticateSectorWithKeyA(sectorTempMax, datakey);
+                    auth3 = mfc.authenticateSectorWithKeyA(sectorHumAmbMin, datakey);
+                    auth4 = mfc.authenticateSectorWithKeyA(sectorHumAmbMax, datakey);
+                    auth5 = mfc.authenticateSectorWithKeyA(sectorHum, datakey);
                 }
                 else if (id == R.id.radioButtonkeyB){
                     hexkey = mHexKeyB.getText().toString();
                     datakey = hexStringToByteArray(hexkey);
-                    auth = mfc.authenticateSectorWithKeyB(sector, datakey);
+                    auth1 = mfc.authenticateSectorWithKeyB(sectorTempMin, datakey);
+                    auth2 = mfc.authenticateSectorWithKeyB(sectorTempMax, datakey);
+                    auth3 = mfc.authenticateSectorWithKeyB(sectorHumAmbMin, datakey);
+                    auth4 = mfc.authenticateSectorWithKeyB(sectorHumAmbMax, datakey);
+                    auth5 = mfc.authenticateSectorWithKeyB(sectorHum, datakey);
                 }
                 else {
 //no item selected poner toast
@@ -275,7 +271,8 @@ public class MainActivity extends AppCompatActivity {
                     mfc.close();
                     return;
                 }
-                if(auth){
+
+                if(auth1){
                     Toast.makeText(this,
                             "Autentificación de sector EXITOSA.",
                             Toast.LENGTH_LONG).show();
@@ -284,6 +281,47 @@ public class MainActivity extends AppCompatActivity {
                             "Autentificación de sector FALLIDA.",
                             Toast.LENGTH_LONG).show();
                 }
+
+                if(auth2){
+                    Toast.makeText(this,
+                            "Autentificación de sector EXITOSA.",
+                            Toast.LENGTH_LONG).show();
+                }else{ // Authentication failed - Handle it
+                    Toast.makeText(this,
+                            "Autentificación de sector FALLIDA.",
+                            Toast.LENGTH_LONG).show();
+                }
+
+                if(auth3){
+                    Toast.makeText(this,
+                            "Autentificación de sector EXITOSA.",
+                            Toast.LENGTH_LONG).show();
+                }else{ // Authentication failed - Handle it
+                    Toast.makeText(this,
+                            "Autentificación de sector FALLIDA.",
+                            Toast.LENGTH_LONG).show();
+                }
+
+                if(auth4){
+                    Toast.makeText(this,
+                            "Autentificación de sector EXITOSA.",
+                            Toast.LENGTH_LONG).show();
+                }else{ // Authentication failed - Handle it
+                    Toast.makeText(this,
+                            "Autentificación de sector FALLIDA.",
+                            Toast.LENGTH_LONG).show();
+                }
+
+                if(auth5){
+                    Toast.makeText(this,
+                            "Autentificación de sector EXITOSA.",
+                            Toast.LENGTH_LONG).show();
+                }else{ // Authentication failed - Handle it
+                    Toast.makeText(this,
+                            "Autentificación de sector FALLIDA.",
+                            Toast.LENGTH_LONG).show();
+                }
+
                 mfc.close();
             }catch (IOException e) {
                 Log.e(TAG, e.getLocalizedMessage());
@@ -316,11 +354,7 @@ public class MainActivity extends AppCompatActivity {
             resolveAuthIntent(intent);
             mTagDialog.cancel();
         }
-        else if (!mWriteMode)
-        {
-// Currently in tag READING mode
-            resolveReadIntent(intent);
-        } else
+         else
         {
 // Currently in tag WRITING mode
             resolveWriteIntent(intent);
