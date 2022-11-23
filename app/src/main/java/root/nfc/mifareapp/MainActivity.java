@@ -65,7 +65,19 @@ public class MainActivity extends AppCompatActivity {
         mHexKeyA = ((EditText) findViewById(R.id.editTextKeyA));
         mHexKeyB = ((EditText) findViewById(R.id.editTextKeyB));
         mRadioGroup = ((RadioGroup) findViewById(R.id.rBtnGrp));
-        findViewById(R.id.escribir_button).setOnClickListener(mTagWrite);
+
+
+        findViewById(R.id.escribir_button1).setOnClickListener(mTagWrite);
+        findViewById(R.id.escribir_button2).setOnClickListener(mTagWrite);
+        findViewById(R.id.escribir_button3).setOnClickListener(mTagWrite);
+        findViewById(R.id.escribir_button4).setOnClickListener(mTagWrite);
+        findViewById(R.id.escribir_button5).setOnClickListener(mTagWrite);
+
+        findViewById(R.id.autenticar_button1).setOnClickListener(mTagAuthenticate);
+        findViewById(R.id.autenticar_button2).setOnClickListener(mTagAuthenticate);
+        findViewById(R.id.autenticar_button3).setOnClickListener(mTagAuthenticate);
+        findViewById(R.id.autenticar_button4).setOnClickListener(mTagAuthenticate);
+        findViewById(R.id.autenticar_button5).setOnClickListener(mTagAuthenticate);
 
 
 // get an instance of the context's cached NfcAdapter
