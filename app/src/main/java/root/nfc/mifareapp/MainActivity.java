@@ -43,17 +43,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTagUID = ((EditText) findViewById(R.id.tag_uid));
-        mCardType = ((EditText) findViewById(R.id.cardtype));
         mHexKeyA = ((EditText) findViewById(R.id.editTextKeyA));
         mHexKeyB = ((EditText) findViewById(R.id.editTextKeyB));
-        mSector = ((EditText) findViewById(R.id.editTextSector));
-        mBloque = ((EditText) findViewById(R.id.editTextBloque));
-        mDataBloque = ((EditText) findViewById(R.id.editTextBloqueLeido));
         mDatatoWrite = ((EditText) findViewById(R.id.editTextBloqueAEscribir));
         mRadioGroup = ((RadioGroup) findViewById(R.id.rBtnGrp));
         findViewById(R.id.buttonauthenticate).setOnClickListener(mTagAuthenticate);
-        findViewById(R.id.buttonLeerbloque).setOnClickListener(mTagRead);
         findViewById(R.id.buttonEscribirBloque).setOnClickListener(mTagWrite);
 // get an instance of the context's cached NfcAdapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -188,7 +182,8 @@ public class MainActivity extends AppCompatActivity {
                 boolean auth = false;
                 String hexkey = "";
                 int id = mRadioGroup.getCheckedRadioButtonId();
-                int bloque = Integer.valueOf(mBloque.getText().toString());
+                //int bloque = Integer.valueOf(mBloque.getText().toString());
+                int bloque = 4;
                 int sector = mfc.blockToSector(bloque);
                 byte[] datakey;
                 if (id == R.id.radioButtonkeyA){
@@ -238,7 +233,8 @@ public class MainActivity extends AppCompatActivity {
                 boolean auth = false;
                 String hexkey = "";
                 int id = mRadioGroup.getCheckedRadioButtonId();
-                int sector = Integer.valueOf(mSector.getText().toString());
+                //int sector = Integer.valueOf(mSector.getText().toString());
+                int sector = 1;
                 byte[] datakey;
                 if (id == R.id.radioButtonkeyA){
                     hexkey = mHexKeyA.getText().toString();
