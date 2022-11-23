@@ -9,16 +9,10 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-<<<<<<< HEAD
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-=======
-            android:layout_width="fill_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
->>>>>>> 87f76f9069dd428e4826e65bb0201fbaddff9a61
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,19 +31,11 @@
 
                 <EditText
                     android:id="@+id/temperaturaMinima_id"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
                     android:inputType="text" />
-<<<<<<< HEAD
 
-=======
-                <Button
-                    android:id="@+id/escribir_button1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:text="@string/escribir_label" />
->>>>>>> 87f76f9069dd428e4826e65bb0201fbaddff9a61
             </LinearLayout>
 
             <Button
@@ -172,7 +158,6 @@
                     android:inputType="text" />
             </LinearLayout>
 
-<<<<<<< HEAD
             <Button
                 android:id="@+id/autentificar_button5"
                 android:layout_width="match_parent"
@@ -184,12 +169,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Button" />
-=======
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
->>>>>>> 87f76f9069dd428e4826e65bb0201fbaddff9a61
 
             <LinearLayout
                 android:layout_width="match_parent"
