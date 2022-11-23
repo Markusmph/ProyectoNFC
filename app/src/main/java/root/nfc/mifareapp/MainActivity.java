@@ -1,4 +1,4 @@
-package root.nfc.proyecto2;
+package root.nfc.mifareapp;
 import java.io.IOException;
 import java.util.Locale;
 import android.nfc.NfcAdapter;
