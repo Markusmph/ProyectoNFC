@@ -13,45 +13,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/infotag_label"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/instrucciones"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tag_UID" />
-                <EditText
-                    android:id="@+id/tag_uid"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:inputType="text" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/card_type" />
-                <EditText
-                    android:id="@+id/cardtype"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:inputType="text" />
-            </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/autenticate_label"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
             <LinearLayout
