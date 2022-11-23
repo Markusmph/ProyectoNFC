@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentFilter.MalformedMimeTypeException;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -60,12 +59,17 @@ public class MainActivity extends AppCompatActivity {
         mHumedadMinima = ((EditText) findViewById(R.id.humedadMinima_id));
         mHumedadMaxima = ((EditText) findViewById(R.id.humedadMaxima_id));
         mHumedadTierraMinima = ((EditText) findViewById(R.id.humedadTierraMinima_id));
-
-
         mHexKeyA = ((EditText) findViewById(R.id.editTextKeyA));
         mHexKeyB = ((EditText) findViewById(R.id.editTextKeyB));
         mRadioGroup = ((RadioGroup) findViewById(R.id.rBtnGrp));
-        findViewById(R.id.escribir_button).setOnClickListener(mTagWrite);
+        //findViewById(R.id.escribir_button).setOnClickListener(mTagWrite);
+        findViewById(R.id.escribir_button1).setOnClickListener(mTagWrite);
+        findViewById(R.id.escribir_button2).setOnClickListener(mTagWrite);
+        findViewById(R.id.escribir_button3).setOnClickListener(mTagWrite);
+        findViewById(R.id.Escribir_button5).setOnClickListener(mTagWrite);
+        findViewById(R.id.escribir_button4).setOnClickListener(mTagWrite);
+
+
 
 
 // get an instance of the context's cached NfcAdapter

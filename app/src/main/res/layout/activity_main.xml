@@ -3,41 +3,63 @@
     android:layout_width="match_parent"
     android:id="@+id/layout"
     android:layout_height="match_parent">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/escribirATag_label"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/temperaturaMinima_label" />
+
                 <EditText
                     android:id="@+id/temperaturaMinima_id"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
                     android:inputType="text" />
+
             </LinearLayout>
+
+            <Button
+                android:id="@+id/autentificar_button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Autentificar" />
+
+            <Button
+                android:id="@+id/escribir_button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Escribir" />
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/temperaturaMaxima_label" />
+
                 <EditText
                     android:id="@+id/temperaturaMaxima_id"
                     android:layout_width="fill_parent"
@@ -45,14 +67,29 @@
                     android:focusable="false"
                     android:inputType="text" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/autetificar_button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Autentificar" />
+
+            <Button
+                android:id="@+id/escribir_button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Escribir" />
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/humedadMinima_label" />
+
                 <EditText
                     android:id="@+id/humedadMinima_id"
                     android:layout_width="fill_parent"
@@ -60,14 +97,29 @@
                     android:focusable="false"
                     android:inputType="text" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/autentificar_button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Autentificar" />
+
+            <Button
+                android:id="@+id/escribir_button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Escribir" />
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/humedadMaxima_label" />
+
                 <EditText
                     android:id="@+id/humedadMaxima_id"
                     android:layout_width="fill_parent"
@@ -75,14 +127,29 @@
                     android:focusable="false"
                     android:inputType="text" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/autentificar_button4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Autentificar" />
+
+            <Button
+                android:id="@+id/escribir_button4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Escribir" />
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/humedadTierraMinima_label" />
+
                 <EditText
                     android:id="@+id/humedadTierraMinima_id"
                     android:layout_width="fill_parent"
@@ -91,49 +158,85 @@
                     android:inputType="text" />
             </LinearLayout>
 
+            <Button
+                android:id="@+id/autentificar_button5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Autentificar" />
+
+            <Button
+                android:id="@+id/Escribir_button5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/keyA_label" />
+
                 <EditText
                     android:id="@+id/editTextKeyA"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />
+
+                <Button
+                    android:id="@+id/button11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/button12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Button" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/keyB_label" />
+
                 <EditText
                     android:id="@+id/editTextKeyB"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sel_llave_label" />
+
                 <RadioGroup
                     android:id="@+id/rBtnGrp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/radioButtonkeyA"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/llaveA" />
+
                     <RadioButton
                         android:id="@+id/radioButtonkeyB"
                         android:layout_width="wrap_content"
@@ -141,12 +244,7 @@
                         android:text="@string/llaveB" />
                 </RadioGroup>
             </LinearLayout>
-            <Button
-                android:id="@+id/escribir_button"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/escribir_label" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
