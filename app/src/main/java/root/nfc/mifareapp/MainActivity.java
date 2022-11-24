@@ -26,7 +26,11 @@ public class MainActivity extends AppCompatActivity {
     IntentFilter[] mReadWriteTagFilters;
     private boolean mWriteMode1 = false;
     private boolean mWriteMode2 = false;
-    private boolean mAuthenticationMode = false;
+    private boolean mWriteMode3 = false;
+    private boolean mWriteMode4 = false;
+    private boolean mWriteMode5 = false;
+    private boolean mAuthenticationMode1 = false;
+    private boolean mAuthenticationMode2 = false;
     private boolean ReadUIDMode = true;
     String[][]mTechList;
     // UI elements
@@ -48,9 +52,13 @@ public class MainActivity extends AppCompatActivity {
         mHexKeyB = ((EditText) findViewById(R.id.editTextKeyB));
         mDatatoWrite = ((EditText) findViewById(R.id.editTextBloqueAEscribir));
         mRadioGroup = ((RadioGroup) findViewById(R.id.rBtnGrp));
-        findViewById(R.id.buttonauthenticate).setOnClickListener(mTagAuthenticate);
+        findViewById(R.id.buttonauthenticate1).setOnClickListener(mTagAuthenticate1);
+        findViewById(R.id.buttonauthenticate2).setOnClickListener(mTagAuthenticate2);
         findViewById(R.id.buttonEscribirBloque4).setOnClickListener(mTagWrite1);
         findViewById(R.id.buttonEscribirBloque5).setOnClickListener(mTagWrite2);
+        findViewById(R.id.buttonEscribirBloque4).setOnClickListener(mTagWrite3);
+        findViewById(R.id.buttonEscribirBloque5).setOnClickListener(mTagWrite4);
+        findViewById(R.id.buttonEscribirBloque4).setOnClickListener(mTagWrite5);
 // get an instance of the context's cached NfcAdapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 // if null is returned this demo cannot run. Use this check if the
@@ -174,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    void resolveWrite1Intent(Intent intent) {
+    void resolveWriteIntent(Intent intent, int bloque) {
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
             Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -185,7 +193,6 @@ public class MainActivity extends AppCompatActivity {
                 String hexkey = "";
                 int id = mRadioGroup.getCheckedRadioButtonId();
                 //int bloque = Integer.valueOf(mBloque.getText().toString());
-                int bloque = 4;
                 int sector = mfc.blockToSector(bloque);
                 byte[] datakey;
                 if (id == R.id.radioButtonkeyA){
@@ -225,58 +232,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    void resolveWrite2Intent(Intent intent) {
-        String action = intent.getAction();
-        if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
-            Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            MifareClassic mfc = MifareClassic.get(tagFromIntent);
-            try {
-                mfc.connect();
-                boolean auth = false;
-                String hexkey = "";
-                int id = mRadioGroup.getCheckedRadioButtonId();
-                //int bloque = Integer.valueOf(mBloque.getText().toString());
-                int bloque = 5;
-                int sector = mfc.blockToSector(bloque);
-                byte[] datakey;
-                if (id == R.id.radioButtonkeyA){
-                    hexkey = mHexKeyA.getText().toString();
-                    datakey = hexStringToByteArray(hexkey);
-                    auth = mfc.authenticateSectorWithKeyA(sector, datakey);
-                }
-                else if (id == R.id.radioButtonkeyB){
-                    hexkey = mHexKeyB.getText().toString();
-                    datakey = hexStringToByteArray(hexkey);
-                    auth = mfc.authenticateSectorWithKeyB(sector, datakey);
-                }
-                else {
-//no item selected poner toast
-                    Toast.makeText(this,
-                            "°Seleccionar llave A o B!",
-                            Toast.LENGTH_LONG).show();
-                    mfc.close();
-                    return;
-                }
-                if(auth){
-                    String strdata = mDatatoWrite.getText().toString();
-                    byte[] datatowrite = hexStringToByteArray(strdata);
-                    mfc.writeBlock(bloque, datatowrite);
-                    Toast.makeText(this,
-                            "Escritura a bloque EXITOSA.",
-                            Toast.LENGTH_LONG).show();
-                }else{ // Authentication failed - Handle it
-                    Toast.makeText(this,
-                            "Escritura a bloque FALLIDA dado autentificación fallida.",
-                            Toast.LENGTH_LONG).show();
-                }
-                mfc.close();
-                mTagDialog.cancel();
-            }catch (IOException e) {
-                Log.e(TAG, e.getLocalizedMessage());
-            }
-        }
-    }
-    void resolveAuthIntent(Intent intent) {
+    void resolveAuthIntent(Intent intent, int sector) {
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
             Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -287,7 +243,6 @@ public class MainActivity extends AppCompatActivity {
                 String hexkey = "";
                 int id = mRadioGroup.getCheckedRadioButtonId();
                 //int sector = Integer.valueOf(mSector.getText().toString());
-                int sector = 1;
                 byte[] datakey;
                 if (id == R.id.radioButtonkeyA){
                     hexkey = mHexKeyA.getText().toString();
@@ -342,21 +297,42 @@ public class MainActivity extends AppCompatActivity {
     {
         Log.d(TAG, "onNewIntent: " + intent);
         Log.i("Foreground dispatch", "Discovered tag with intent: " + intent);
-        if (mAuthenticationMode)
+        if (mAuthenticationMode1)
         {
 // Currently in tag AUTHENTICATION mode
-            resolveAuthIntent(intent);
+            resolveAuthIntent(intent, 1);
+            mTagDialog.cancel();
+        }
+        else if (mAuthenticationMode2)
+        {
+// Currently in tag AUTHENTICATION mode
+            resolveAuthIntent(intent, 2);
             mTagDialog.cancel();
         }
         else if (mWriteMode1)
         {
 // Currently in tag READING mode
-            resolveWrite1Intent(intent);
+            resolveWriteIntent(intent, 4);
         }
         else if(mWriteMode2)
         {
 // Currently in tag WRITING mode
-            resolveWrite2Intent(intent);
+            resolveWriteIntent(intent, 5);
+        }
+        else if(mWriteMode3)
+        {
+// Currently in tag WRITING mode
+            resolveWriteIntent(intent, 6);
+        }
+        else if(mWriteMode4)
+        {
+// Currently in tag WRITING mode
+            resolveWriteIntent(intent, 8);
+        }
+        else if(mWriteMode5)
+        {
+// Currently in tag WRITING mode
+            resolveWriteIntent(intent, 9);
         }
     }
     /* Called when the system is about to start resuming a previous activity. */
@@ -379,6 +355,24 @@ public class MainActivity extends AppCompatActivity {
         mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent,
                 mReadWriteTagFilters, mTechList);
     }
+    private void enableTagWriteMode3()
+    {
+        mWriteMode3 = true;
+        mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent,
+                mReadWriteTagFilters, mTechList);
+    }
+    private void enableTagWriteMode4()
+    {
+        mWriteMode4 = true;
+        mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent,
+                mReadWriteTagFilters, mTechList);
+    }
+    private void enableTagWriteMode5()
+    {
+        mWriteMode5 = true;
+        mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent,
+                mReadWriteTagFilters, mTechList);
+    }
     /*
     private void enableTagReadMode()
     {
@@ -390,23 +384,33 @@ public class MainActivity extends AppCompatActivity {
     {
         mWriteMode1 = false;
         mWriteMode2 = false;
-        mAuthenticationMode = false;
+        mWriteMode3 = false;
+        mWriteMode4 = false;
+        mWriteMode5 = false;
+        mAuthenticationMode1 = false;
+        mAuthenticationMode2 = false;
     }
-    private void enableTagAuthMode()
+    private void enableTagAuthMode1()
     {
-        mAuthenticationMode = true;
+        mAuthenticationMode1 = true;
+        mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent,
+                mReadWriteTagFilters, mTechList);
+    }
+    private void enableTagAuthMode2()
+    {
+        mAuthenticationMode2 = true;
         mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent,
                 mReadWriteTagFilters, mTechList);
     }
     /*
      * **** TAG AUTHENTICATE METHODS ****
      */
-    private View.OnClickListener mTagAuthenticate = new View.OnClickListener()
+    private View.OnClickListener mTagAuthenticate1 = new View.OnClickListener()
     {
         @Override
         public void onClick(View arg0)
         {
-            enableTagAuthMode();
+            enableTagAuthMode1();
             AlertDialog.Builder builder = new AlertDialog.Builder(
                     MainActivity.this)
                     .setTitle(getString(R.string.ready_to_authenticate))
@@ -426,7 +430,39 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onCancel(DialogInterface dialog)
                         {
-                            mAuthenticationMode = false;
+                            mAuthenticationMode1 = false;
+                        }
+                    });
+            mTagDialog = builder.create();
+            mTagDialog.show();
+        }
+    };
+    private View.OnClickListener mTagAuthenticate2 = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View arg0)
+        {
+            enableTagAuthMode2();
+            AlertDialog.Builder builder = new AlertDialog.Builder(
+                    MainActivity.this)
+                    .setTitle(getString(R.string.ready_to_authenticate))
+                    .setMessage(getString(R.string.ready_to_authenticate_instructions))
+                    .setCancelable(true)
+                    .setNegativeButton("Cancelar",
+                            new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog,
+                                                    int id)
+                                {
+                                    dialog.cancel();
+                                }
+                            })
+                    .setOnCancelListener(new DialogInterface.OnCancelListener()
+                    {
+                        @Override
+                        public void onCancel(DialogInterface dialog)
+                        {
+                            mAuthenticationMode2 = false;
                         }
                     });
             mTagDialog = builder.create();
@@ -514,6 +550,102 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View arg0)
         {
             enableTagWriteMode2();
+            AlertDialog.Builder builder = new AlertDialog.Builder(
+                    MainActivity.this)
+                    .setTitle(getString(R.string.ready_to_write))
+                    .setMessage(getString(R.string.ready_to_write_instructions))
+                    .setCancelable(true)
+                    .setNegativeButton("Cancelar",
+                            new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog,
+                                                    int id)
+                                {
+                                    dialog.cancel();
+                                }
+                            })
+                    .setOnCancelListener(new DialogInterface.OnCancelListener()
+                    {
+                        @Override
+                        public void onCancel(DialogInterface dialog)
+                        {
+                            disableModes();
+                        }
+                    });
+            mTagDialog = builder.create();
+            mTagDialog.show();
+        }
+    };
+    private View.OnClickListener mTagWrite3 = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View arg0)
+        {
+            enableTagWriteMode3();
+            AlertDialog.Builder builder = new AlertDialog.Builder(
+                    MainActivity.this)
+                    .setTitle(getString(R.string.ready_to_write))
+                    .setMessage(getString(R.string.ready_to_write_instructions))
+                    .setCancelable(true)
+                    .setNegativeButton("Cancelar",
+                            new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog,
+                                                    int id)
+                                {
+                                    dialog.cancel();
+                                }
+                            })
+                    .setOnCancelListener(new DialogInterface.OnCancelListener()
+                    {
+                        @Override
+                        public void onCancel(DialogInterface dialog)
+                        {
+                            disableModes();
+                        }
+                    });
+            mTagDialog = builder.create();
+            mTagDialog.show();
+        }
+    };
+    private View.OnClickListener mTagWrite4 = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View arg0)
+        {
+            enableTagWriteMode4();
+            AlertDialog.Builder builder = new AlertDialog.Builder(
+                    MainActivity.this)
+                    .setTitle(getString(R.string.ready_to_write))
+                    .setMessage(getString(R.string.ready_to_write_instructions))
+                    .setCancelable(true)
+                    .setNegativeButton("Cancelar",
+                            new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog,
+                                                    int id)
+                                {
+                                    dialog.cancel();
+                                }
+                            })
+                    .setOnCancelListener(new DialogInterface.OnCancelListener()
+                    {
+                        @Override
+                        public void onCancel(DialogInterface dialog)
+                        {
+                            disableModes();
+                        }
+                    });
+            mTagDialog = builder.create();
+            mTagDialog.show();
+        }
+    };
+    private View.OnClickListener mTagWrite5 = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View arg0)
+        {
+            enableTagWriteMode5();
             AlertDialog.Builder builder = new AlertDialog.Builder(
                     MainActivity.this)
                     .setTitle(getString(R.string.ready_to_write))

@@ -66,10 +66,15 @@
                 </RadioGroup>
             </LinearLayout>
             <Button
-                android:id="@+id/buttonauthenticate"
+                android:id="@+id/buttonauthenticate1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/authenticatebutton" />
+                android:text="@string/authenticate1button" />
+            <Button
+                android:id="@+id/buttonauthenticate2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/authenticate2button" />
             <Button
                 android:id="@+id/buttonEscribirBloque4"
                 android:layout_width="fill_parent"
@@ -80,6 +85,21 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/escribir_bloque_5_button" />
+            <Button
+                android:id="@+id/buttonEscribirBloque6"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/escribir_bloque_6_button" />
+            <Button
+                android:id="@+id/buttonEscribirBloque8"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/escribir_bloque_8_button" />
+            <Button
+                android:id="@+id/buttonEscribirBloque9"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/escribir_bloque_9_button" />
             <EditText
                 android:id="@+id/editTextBloqueAEscribir"
                 android:layout_width="fill_parent"
